@@ -10,8 +10,11 @@ from tkinter import Label
 from tkinter import NO
 from tkinter import NONE
 from tkinter import LEFT
+from tkinter import RIGHT
 from tkinter import TOP
 from tkinter import BOTTOM
+from tkinter import SE
+from tkinter import SW
 from tkinter.messagebox import askokcancel
 
 
@@ -25,9 +28,9 @@ class ControlFrame(Frame):  # TODO: refactor module (too much of copy-paste)
 
         # Frame buttons
         quit_button = Button(self, text='Quit', command=self.quit)  # TODO make separate class
-        quit_button.pack(side=BOTTOM)
+        quit_button.pack(side=LEFT, anchor=SE)
         save_button = Button(self, text='Save', command=self.save)
-        save_button.pack(side=BOTTOM)
+        save_button.pack(side=RIGHT, anchor=SW)
 
     def quit(self):
         if askokcancel('Verify exit', 'Really quit?'):
