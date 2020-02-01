@@ -1,4 +1,7 @@
-__all__ = ['ControlFrame']
+__all__ = [
+    'ControlFrame',
+    'InputFrame',
+]
 
 from tkinter import Button
 from tkinter import Frame
@@ -19,7 +22,7 @@ class ControlFrame(Frame):
         # Frame buttons
         quit_button = Button(self, text='Quit', command=self.quit)  # TODO make separate class
         quit_button.pack(side=BOTTOM)
-        save_button = Button(self, text='Save', command=self.save)  # TODO make separate class
+        save_button = Button(self, text='Save', command=self.save)
         save_button.pack(side=BOTTOM)
 
     def quit(self):
@@ -27,4 +30,20 @@ class ControlFrame(Frame):
             Frame.quit(self)
 
     def save(self):
-        raise NotImplementedError(f'Save function not implemented yet')
+        raise NotImplementedError('Save function not implemented yet')
+
+
+class InputFrame(Frame):
+
+    def __init__(self, root):
+        super().__init__(root, height=400, width=200)
+        self.pack_propagate(0)
+        self.config(bg='light green')
+        self.pack(side=LEFT, expand=NO, fill=NONE)
+
+        # Frame buttons
+        input_button = Button(self, text='Enter', command=self.enter_money)
+        input_button.pack(side=BOTTOM)
+
+    def enter_money(self):
+        raise NotImplementedError('Enter function not implemented yet')

@@ -2,6 +2,7 @@ __all__ = ['GUI']
 
 from tkinter import Tk
 from .frames import ControlFrame
+from .frames import InputFrame
 
 
 class GUI:
@@ -15,6 +16,7 @@ class GUI:
 
         # Frames
         self.control_frame = ControlFrame(self.root)
+        self.input_frame = InputFrame(self.root)
 
     def start(self):
         self.root.mainloop()
