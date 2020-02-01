@@ -1,17 +1,21 @@
 __all__ = [
     'ControlFrame',
     'InputFrame',
+    'FreeFrame',
 ]
 
 from tkinter import Button
 from tkinter import Frame
+from tkinter import Label
 from tkinter import NO
 from tkinter import NONE
-from tkinter import LEFT, BOTTOM
+from tkinter import LEFT
+from tkinter import TOP
+from tkinter import BOTTOM
 from tkinter.messagebox import askokcancel
 
 
-class ControlFrame(Frame):
+class ControlFrame(Frame):  # TODO: refactor module (too much of copy-paste)
 
     def __init__(self, root):
         super().__init__(root, height=400, width=200)
@@ -47,3 +51,25 @@ class InputFrame(Frame):
 
     def enter_money(self):
         raise NotImplementedError('Enter function not implemented yet')
+
+
+class FreeFrame(Frame):
+
+    def __init__(self, root):
+        super().__init__(root, height=400, width=200)
+        self.pack_propagate(0)
+        self.config(bg='pink')
+        self.pack(side=LEFT, expand=NO, fill=NONE)
+        self.title_label = Label(self, text='\nIdeas for this frame:', bg='pink')
+        self.title_label.pack(side=TOP)
+        self.list_ideas()
+
+    def list_ideas(self):
+        ideas = [
+            '- calculator',
+            '- calendar',
+            '- notes',
+            '- etc...',
+        ]
+        for idea in ideas:
+            Label(self, text=idea, bg='pink').pack(side=TOP)
