@@ -8,10 +8,7 @@ __all__ = ['InitData']
 class InitData:
 
     YEAR = 2020
-    MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    CATEGORIES = ['Salary', 'Food', 'House', 'Car']
+    MONTHS = ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')
+    CATEGORIES = ('Salary', 'Food', 'House', 'Car')
+    MONTH_NOW = datetime.today().month
 
-    @staticmethod
-    def default_month() -> int:
-        today = datetime.today()
-        return today.month
