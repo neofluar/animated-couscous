@@ -1,17 +1,21 @@
 __all__ = ['GUI']
 
 from tkinter import Tk
+
 from .frames import ControlFrame
 from .frames import FreeFrame
 from .frames import InputFrame
+from settings import Settings
 
 
 class GUI:
 
-    def __init__(self):
+    def __init__(self, settings: Settings):
+        self.settings = settings
+
         # Main window settings
         self.root = Tk()
-        self.root.title('MyBalance 0.1')
+        self.root.title('MyBalance 0.1.1')
         self.root.geometry('600x400')
         self.root.resizable(0, 0)
 
