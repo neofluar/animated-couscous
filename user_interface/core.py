@@ -2,9 +2,7 @@ __all__ = ['GUI']
 
 from tkinter import Tk
 
-from .frames import ControlFrame
-from .frames import FreeFrame
-from .frames import InputFrame
+from .frames import ControlFrame, FreeFrame, InputFrame
 from settings import Settings
 
 

@@ -4,29 +4,30 @@ __all__ = [
     'FreeFrame',
 ]
 
-from tkinter import Button
-from tkinter import Frame
-from tkinter import Label
-from tkinter import NO
-from tkinter import NONE
-from tkinter import LEFT
-from tkinter import RIGHT
-from tkinter import TOP
-from tkinter import BOTTOM
-from tkinter import SE
-from tkinter import SW
+from abc import ABC
+from tkinter import Button, Frame, Label
+from tkinter import NO, NONE
+from tkinter import LEFT, RIGHT, TOP, BOTTOM, SE, SW
 from tkinter.messagebox import askokcancel
 
 
-class ControlFrame(Frame):  # TODO: refactor module (too much of copy-paste)
+class BaseFrame(Frame, ABC):
 
     def __init__(self, root):
         super().__init__(root, height=400, width=200)
         self.pack_propagate(0)
-        self.config(bg='light blue')
+
+    def pack_frame(self):
         self.pack(side=LEFT, expand=NO, fill=NONE)
 
-        # Frame buttons
+
+class ControlFrame(BaseFrame):
+
+    def __init__(self, root):
+        super().__init__(root)
+        self.config(bg='light blue')
+        self.pack_frame()
+
         quit_button = Button(self, text='Quit', command=self.quit)  # TODO make separate class
         quit_button.pack(side=LEFT, anchor=SE)
         save_button = Button(self, text='Save', command=self.save)
@@ -40,15 +41,14 @@ class ControlFrame(Frame):  # TODO: refactor module (too much of copy-paste)
         raise NotImplementedError('Save function not implemented yet')
 
 
-class InputFrame(Frame):
+class InputFrame(BaseFrame):
 
     def __init__(self, root):
-        super().__init__(root, height=400, width=200)
-        self.pack_propagate(0)
+        super().__init__(root)
         self.config(bg='light green')
-        self.pack(side=LEFT, expand=NO, fill=NONE)
 
-        # Frame buttons
+        self.pack_frame()
+
         input_button = Button(self, text='Enter', command=self.enter_money)
         input_button.pack(side=BOTTOM)
 
@@ -56,13 +56,14 @@ class InputFrame(Frame):
         raise NotImplementedError('Enter function not implemented yet')
 
 
-class FreeFrame(Frame):
+class FreeFrame(BaseFrame):
 
     def __init__(self, root):
-        super().__init__(root, height=400, width=200)
-        self.pack_propagate(0)
+        super().__init__(root)
         self.config(bg='pink')
-        self.pack(side=LEFT, expand=NO, fill=NONE)
+
+        self.pack_frame()
+
         self.title_label = Label(self, text='\nIdeas for this frame:', bg='pink')
         self.title_label.pack(side=TOP)
         self.list_ideas()

@@ -10,6 +10,8 @@ class Settings:
     YEAR = 2020
     MONTHS = ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')
     CATEGORIES = ('Salary', 'Food', 'House', 'Car')
-    MONTH_NOW = datetime.today().month
     DATABASE_PATH = ''
 
+    @property
+    def today_month(self) -> int:
+        return datetime.today().month

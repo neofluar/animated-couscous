@@ -11,7 +11,7 @@ class App:
         self.database = DataBase(self.settings.DATABASE_PATH)
 
     def run_app(self):
-        print(f'{self.settings.MONTH_NOW}')
+        print(f'{self.settings.today_month}')
         self.gui.start()
 
 
