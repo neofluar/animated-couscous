@@ -5,4 +5,4 @@ from dataclasses import dataclass
 
 @dataclass()
 class DataBase:
-    path: str
+    path_to_database: str
