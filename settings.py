@@ -22,11 +22,16 @@ class Settings:
 
     DATABASE_PATH = os.path.expanduser('~/app/db/')
 
-    CATEGORIES = tuple(category for category in _Categories)
+    CATEGORIES = tuple(category.name for category in _Categories)
 
     YEAR = datetime.today().year
     MONTHS = tuple(calendar.month_name)
 
     @property
-    def today_month(self) -> int:
-        return datetime.today().month
+    def today_month(self) -> str:
+        return self.MONTHS[datetime.today().month]
+
+    @property
+    def today_month_calendar(self) -> str:
+        text_calendar = calendar.TextCalendar()
+        return text_calendar.formatmonth(self.YEAR, self.MONTHS.index(self.today_month))

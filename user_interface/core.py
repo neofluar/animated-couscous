@@ -18,9 +18,9 @@ class GUI:
         self.root.resizable(0, 0)
 
         # Frames
-        self.control_frame = ControlFrame(self.root)
+        self.control_frame = ControlFrame(self.root, self.settings)
         self.input_frame = InputFrame(self.root)
-        self.free_frame = FreeFrame(self.root)
+        self.free_frame = FreeFrame(self.root, self.settings)
 
     def start(self):
         self.root.mainloop()
