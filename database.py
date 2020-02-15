@@ -1,7 +1,6 @@
 __all__ = ['DataBase']
 
 import os
-from typing import Tuple
 
 import openpyxl
 
@@ -10,14 +9,17 @@ class DataBase:
 
     def __init__(self, path_to_db: str):
         self.path_to_db = path_to_db
-        self.validate_path_to_db(self.path_to_db)
+        self._validate_path_to_db(self.path_to_db)
+        self.workbook = self._open_last_record(self.path_to_db)
 
-        self._last_record = self._select_last_record(self.path_to_db)
-        self.workbook, self.sheet = self._open_record(self._last_record)
-
-    def validate_path_to_db(self, path: str):
+    def _validate_path_to_db(self, path: str):
         if not (self._db_folder_exists(path) and self._db_records_exist(path)):
             raise FileNotFoundError(f'No database at {path}')
+
+    def _open_last_record(self, path: str) -> openpyxl.Workbook:
+        last_record = self._select_last_record(path)
+        workbook = self._open_record(last_record)
+        return workbook
 
     @staticmethod
     def _db_folder_exists(path: str) -> bool:
@@ -34,7 +36,5 @@ class DataBase:
         return os.path.join(path, records[0])
 
     @staticmethod
-    def _open_record(record: str) -> Tuple[openpyxl.workbook.workbook.Workbook, openpyxl.worksheet.worksheet.Worksheet]:
-        workbook = openpyxl.load_workbook(record)
-        sheet = workbook.active
-        return workbook, sheet
+    def _open_record(record: str) -> openpyxl.Workbook:
+        return openpyxl.load_workbook(record)

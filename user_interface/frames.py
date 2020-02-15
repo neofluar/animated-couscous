@@ -31,7 +31,7 @@ class ControlFrame(BaseFrame):
         self.config(bg='light blue')
         self.pack_frame()
 
-        year_label = Label(self, text=self.settings.YEAR)
+        year_label = Label(self, text=self.settings.today_year)
         year_label.pack(side=TOP, pady=10)
 
         selected_month = StringVar(self)  # TODO: one function for option menus and for buttons

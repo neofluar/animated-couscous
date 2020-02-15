@@ -2,7 +2,6 @@ __all__ = ['Settings']
 
 import os
 import calendar
-
 from enum import Enum
 from datetime import datetime
 
@@ -20,8 +19,11 @@ class Settings:
 
     PATH_TO_DB = os.path.expanduser('~/my_balance/db')
     CATEGORIES = tuple(category.name for category in _Categories)
-    YEAR = datetime.today().year
     MONTHS = tuple(calendar.month_name)
+
+    @property
+    def today_year(self) -> int:
+        return datetime.today().year
 
     @property
     def today_month(self) -> str:
@@ -30,4 +32,4 @@ class Settings:
     @property
     def today_month_calendar(self) -> str:
         text_calendar = calendar.TextCalendar()
-        return text_calendar.formatmonth(self.YEAR, self.MONTHS.index(self.today_month))
+        return text_calendar.formatmonth(self.today_year, self.MONTHS.index(self.today_month))
