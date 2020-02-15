@@ -5,9 +5,9 @@ __all__ = [
 ]
 
 from abc import ABC
-from tkinter import Button, Frame, Label, OptionMenu, Text, Scrollbar
+from tkinter import Button, Frame, Label, OptionMenu, Text
 from tkinter import StringVar
-from tkinter import Y, NO, NONE
+from tkinter import NO, NONE
 from tkinter import LEFT, RIGHT, TOP, BOTTOM, SE, SW
 from tkinter.messagebox import askokcancel
 
@@ -26,9 +26,10 @@ class ControlFrame(BaseFrame):
 
     def __init__(self, root, settings):
         super().__init__(root)
+        self.settings = settings
+
         self.config(bg='light blue')
         self.pack_frame()
-        self.settings = settings
 
         year_label = Label(self, text=self.settings.YEAR)
         year_label.pack(side=TOP, pady=10)

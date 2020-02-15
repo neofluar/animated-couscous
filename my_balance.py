@@ -8,10 +8,9 @@ class App:
     def __init__(self):
         self.settings = Settings()
         self.gui = GUI(self.settings)
-        self.database = DataBase(self.settings.DATABASE_PATH)
+        self.database = DataBase(self.settings.PATH_TO_DB)
 
     def run_app(self):
-        print(f'{self.settings.today_month}')
         self.gui.start()
 
 

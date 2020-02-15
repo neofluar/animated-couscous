@@ -4,7 +4,6 @@ import os
 import calendar
 
 from enum import Enum
-from dataclasses import dataclass
 from datetime import datetime
 
 
@@ -17,13 +16,10 @@ class _Categories(Enum):
     CATEGORY5 = 5
 
 
-@dataclass(frozen=True)
 class Settings:
 
-    DATABASE_PATH = os.path.expanduser('~/app/db/')
-
+    PATH_TO_DB = os.path.expanduser('~/my_balance/db')
     CATEGORIES = tuple(category.name for category in _Categories)
-
     YEAR = datetime.today().year
     MONTHS = tuple(calendar.month_name)
 
