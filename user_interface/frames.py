@@ -26,30 +26,32 @@ class ControlFrame(BaseFrame):
 
     def __init__(self, root, settings):
         super().__init__(root)
-        self.settings = settings
-
         self.config(bg='light blue')
         self.pack_frame()
 
-        year_label = Label(self, text=self.settings.today_year)
-        year_label.pack(side=TOP, pady=10)
+        self.settings = settings
+        self._add_year_label()
 
-        selected_month = StringVar(self)  # TODO: one function for option menus and for buttons
-        selected_month.set(self.settings.today_month)
-        month_menu = OptionMenu(self, selected_month, *self.settings.MONTHS[1:])
-        month_menu.config(width=12)
-        month_menu.pack(side=TOP, pady=10)
+        self.selected_month = StringVar(self)
+        self.selected_month.set(self.settings.today_month)
+        self.month_menu = OptionMenu(self, self.selected_month, *self.settings.MONTHS[1:])
+        self.month_menu.config(width=12)
+        self.month_menu.pack(side=TOP, pady=10)
 
-        selected_category = StringVar(self)  # TODO: one function for option menus and for buttons
-        selected_category.set(self.settings.CATEGORIES[0])
-        category_menu = OptionMenu(self, selected_category, *self.settings.CATEGORIES)
-        category_menu.config(width=12)
-        category_menu.pack(side=TOP, pady=10)
+        self.selected_category = StringVar(self)
+        self.selected_category.set(self.settings.CATEGORIES[0])
+        self.category_menu = OptionMenu(self, self.selected_category, *self.settings.CATEGORIES)
+        self.category_menu.config(width=12)
+        self.category_menu.pack(side=TOP, pady=10)
 
-        quit_button = Button(self, text='Quit', command=self.quit)  # TODO make separate class
-        quit_button.pack(side=LEFT, anchor=SE)
-        save_button = Button(self, text='Save', command=self.save)
-        save_button.pack(side=RIGHT, anchor=SW)
+        self.quit_button = Button(self, text='Quit', command=self.quit)
+        self.quit_button.pack(side=LEFT, anchor=SE)
+
+        self.save_button = Button(self, text='Save', command=self.save)
+        self.save_button.pack(side=RIGHT, anchor=SW)
+
+    def _add_year_label(self):
+        Label(self, text=self.settings.today_year).pack(side=TOP, pady=10)
 
     def quit(self):
         if askokcancel('Verify exit', 'Really quit?'):
@@ -66,12 +68,12 @@ class InputFrame(BaseFrame):
         self.config(bg='light green')
         self.pack_frame()
 
-        input_field = Text(self, height=20, width=20)
-        input_field.config(bg='light green')
-        input_field.pack(side=TOP, pady=10)
+        self.input_field = Text(self, height=20, width=20)
+        self.input_field.config(bg='light green')
+        self.input_field.pack(side=TOP, pady=10)
 
-        input_button = Button(self, text='Enter', command=self.enter_money)
-        input_button.pack(side=BOTTOM)
+        self.input_button = Button(self, text='Enter', command=self.enter_money)
+        self.input_button.pack(side=BOTTOM)
 
     def enter_money(self):
         raise NotImplementedError('Enter function not implemented yet')
@@ -83,7 +85,9 @@ class FreeFrame(BaseFrame):
         super().__init__(root)
         self.config(bg='pink')
         self.pack_frame()
+
         self.settings = settings
+
         self.pack_month_calendar()
         self.list_ideas()
 
